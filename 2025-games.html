@@ -27,12 +27,12 @@
         
         function recalculateCoords() {
             tierListImage = document.getElementById("tierlist");
-            console.log(tierListImage);
+            //console.log(tierListImage);
         
             imageXRatio = tierListImage.width / tierListImage.naturalWidth;
             imageYRatio = tierListImage.height / tierListImage.naturalHeight;
-            console.log(imageXRatio);
-            console.log(imageYRatio);
+            //console.log(imageXRatio);
+            //console.log(imageYRatio);
             
             for (let i = 0 ; i < areaElements.length; i++) {
                 coordinates = convertCoords(originalCoordinates[i])
