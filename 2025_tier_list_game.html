@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> My 2025 Tier Game List </title>
+    <script>
+        // docs on ResizeObserver - https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver
+        const resizeObserver = new ResizeObserver(() => {
+            recalculateCoords();
+        })
+        
+        const originalCoordinates = []
+        const areaElements = []
+        
+        window.onload = function() {
+            collectOriginalCoordinates();
+            recalculateCoords();
+            resizeObserver.observe(document.getElementById("tierlist"));
+        }
+        
+        function collectOriginalCoordinates() {
+            areas = document.getElementsByTagName("area")
+            for (let i = 0 ; i < areas.length; i++) {
+                areaElements.push(areas[i])
+                originalCoordinates.push(areas[i].coords)
+            }
+        }
+        
+        function recalculateCoords() {
+            tierListImage = document.getElementById("tierlist");
+            console.log(tierListImage);
+        
+            imageXRatio = tierListImage.width / tierListImage.naturalWidth;
+            imageYRatio = tierListImage.height / tierListImage.naturalHeight;
+            console.log(imageXRatio);
+            console.log(imageYRatio);
+            
+            for (let i = 0 ; i < areaElements.length; i++) {
+                coordinates = convertCoords(originalCoordinates[i])
+                //console.log(convertCoords(areas[i].coords))
+                
+                newCoords = [
+                    Math.ceil(coordinates[0] * imageXRatio),
+                    Math.ceil(coordinates[1] * imageYRatio),
+                    Math.ceil(coordinates[2] * imageXRatio),
+                    Math.ceil(coordinates[3] * imageYRatio)     
+                ]
+                
+                newCoordsFormatted = `${newCoords[0]},${newCoords[1]},${newCoords[2]},${newCoords[3]}`
+                
+                areaElements[i].coords = newCoordsFormatted
+            }
+        }
+        
+        function convertCoords(coordsString) {
+            const re = new RegExp("([0-9]+),([0-9]+),([0-9]+),([0-9]+)");
+            const matches = re.exec(coordsString)
+            //console.log(re.exec(coordsString))
+            topLeftX = matches[1]
+            topLeftY = matches[2]
+            bottomRightX = matches[3]
+            bottomRightY = matches[4]
+            return [ topLeftX, topLeftY, bottomRightX, bottomRightY ]
+        }
+        
+    </script>
+</head>
+<body>
+`<!-- doc on mapp element https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/map -->
+    <img id="tierlist" src="https://i.imgur.com/naIfhFt.jpeg" usemap="#imagmap" style="width: 100%">
+    <map name="imagmap">
+        <area shape="rect" coords="0,0,375,500" alt="Hell Yeah!" href="https://www.youtube.com/watch?v=-u2gTyf7iwI"/>
+        <area shape="rect" coords="650,0,985,500" alt="Deep Rock Galactic" href="https://www.youtube.com/watch?v=H2Y0TNBFdvs"/>
+        <area shape="rect" coords="1200,0,2100,500" alt="Crow Country" href="https://www.youtube.com/watch?v=-fP-0-dEHhA"/>
+        <area shape="rect" coords="2315,0,2650,500" alt="Left 4 Dead 2" href="https://www.youtube.com/watch?v=JzMP6xxudRo"/>
+        
+        <area shape="rect" coords="0,540,400,990" alt="Damn Good" href="https://www.youtube.com/watch?v=KxwcQ1dapw8"/>
+        
+        <area shape="rect" coords="500,500,875,1000" alt="Arco" href="https://www.youtube.com/watch?v=VnwWyt93ci4&list=OLAK5uy_mrMchQQ1AECsUGEN7z1YS2esB7FYaQ2gw"/>
+        <area shape="rect" coords="875,540,1360,1100" alt="Siddy" href="https://youtu.be/FCCorSkUrYM"/>
+        <area shape="rect" coords="1410,535,1710,1040" alt="Thank Goodness You're Here" href="https://www.youtube.com/watch?v=E6G8Nv9f88k"/>
+        <area shape="rect" coords="1925,570,2265,1080" alt="Vermintide" href="https://www.youtube.com/watch?v=PbSWimlbRWE"/>
+        
+        <area shape="rect" coords="0,1070,690,1580" alt="Nice!" href="https://www.youtube.com/watch?v=lg5WKsVnEA4"/>
+        <area shape="rect" coords="760,1075,1100,1580" alt="D4: Dark Dreams Don't Die" href="https://www.youtube.com/watch?v=Tw2_r0vDzio"/>
+        <area shape="rect" coords="1180,1100,1510,1610" alt="Dave The Diver" href="https://www.youtube.com/watch?v=W1ZKcZbi1rg"/>
+        <area shape="rect" coords="1635,1385,1670,1445" alt="Pikachu" href="https://www.youtube.com/watch?v=ZlzvRvJrIYc"/>
+        <area shape="rect" coords="1935,1135,2290,1635" alt="Goodnight Universe" href="https://www.youtube.com/watch?v=1nQT5pK2sIE"/>
+        <area shape="rect" coords="2350,1135,2650,1585" alt="ENA Dream BBQ Chapter 1" href="https://www.youtube.com/watch?v=juBv2XWnwt8"/>
+        <area shape="rect" coords="2720,1150,2950,1500" alt="Will" href="https://www.twitch.tv/willybeetwitch"/>
+        
+        <area shape="rect" coords="0,1675,500,2180" alt="All My Friends by LCD Soundsystem" href="https://www.youtube.com/watch?v=NIjBIQ7Ixn4"/>
+        <area shape="rect" coords="570,1675,1070,2180" alt="Abiotic Factor" href="https://www.youtube.com/watch?v=d59J78yhwtg"/>
+        <area shape="rect" coords="1110,1685,1490,2180" alt="Overcooked 2" href="https://www.reddit.com/r/TheBear/comments/wkqyo1/the_bear_but_its_only_about_pbjs/"/>
+        <area shape="rect" coords="1760,1715,2260,2220" alt="GTFO" href="https://www.youtube.com/watch?v=6354tj4xpKc"/>
+        <area shape="rect" coords="2385,1715,2725,2220" alt="Peak" href="https://www.youtube.com/watch?v=w_R-nijbFqk"/>
+        <area shape="rect" coords="2775,1760,2935,2130" alt="Brown Paper Bag" href="https://www.youtube.com/watch?v=oYImsLC663Q"/>
+        
+        <area shape="rect" coords="0,2280,710,2685" alt="Friends" href="https://www.youtube.com/watch?v=4H6Ux3l75Rc"/>
+        <area shape="rect" coords="905,2285,1240,2790" alt="Phasmophobia" href="https://www.youtube.com/watch?v=nhuMoeOt8C8"/>
+        <area shape="rect" coords="1370,2275,1710,2780" alt="100% Orange Juice" href="https://www.youtube.com/watch?v=7rKmg5pr3Ko"/>
+        <area shape="rect" coords="1825,2330,2445,2685" alt="Nerts Online" href="https://www.youtube.com/watch?v=6WqQlxmrCK0"/>
+        <area shape="rect" coords="2620,2285,2955,2785" alt="Lethal Company" href="https://www.youtube.com/watch?v=s6M01N-BR10"/>
+        
+        <area shape="rect" coords="0,2905,700,3270" alt="Whatever" href="https://www.youtube.com/watch?v=jVhlJNJopOQ"/>
+        <area shape="rect" coords="820,2865,1320,3365" alt="Yeah! You Want &quot;Those Games,&quot; Right? So Here You Go! Now, Let's See You Clear Them!" href="https://www.youtube.com/watch?v=wwE1fZmIkss"/>
+        <area shape="rect" coords="1385,2850,1735,3355" alt="Lumino City" href="https://www.youtube.com/watch?v=szS7I0AngNA"/>
+        
+        <!-- info on overlapping map elements: https://stackoverflow.com/questions/1342619/how-can-map-tags-be-used-for-two-images-that-overlap -->
+        <area shape="rect" coords="0,3475,905,3975" alt="Yeah, Hell" href="https://www.youtube.com/watch?v=iyvQ48V7LAQ"/>
+        <area shape="rect" coords="1110,3485,1445,3985" alt="Mimesis Demo" href="https://youtu.be/OR4N5OhcY9s?t=92"/>
+        <area shape="rect" coords="2620,3470,3000,3975" alt="Party Club Demo" href="https://www.youtube.com/watch?v=x1Yb3wN_cJY"/>
+        <area shape="rect" coords="910,3440,3024,4032" alt="UNO" href="https://www.youtube.com/watch?v=FSswEzWJdWo"/>
+    </map>
+</body>
+</html>
